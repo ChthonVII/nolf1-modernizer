@@ -6504,6 +6504,9 @@
 #define IDS_ACTIONSTRING_TOGGLE_ZOOM    30104
 #define IDS_INTEL_BLACKSCREEN_FIX       30105
 #define IDS_HELP_INTEL_BLACKSCREEN_FIX  30106
+// 30107, 30108, 30109 used by jukebox stuff not in v1.006patch3.1
+#define IDS_CONTROL_CROUCHLOCKTOGGLE    30110
+#define IDS_ACTIONSTRING_CROUCHLOCKTOGGLE    30111
 
 // Next default values for new objects
 // 

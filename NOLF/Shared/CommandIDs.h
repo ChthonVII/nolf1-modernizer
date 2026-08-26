@@ -36,7 +36,7 @@
 #define COMMAND_ID_LOOKDOWN			17
 
 // These are available for use...
-#define COMMAND_ID_UNUSED			18
+#define COMMAND_ID_CROUCHLOCK		18
 #define COMMAND_ID_UNUSED2			19
 
 

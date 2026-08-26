@@ -6507,6 +6507,8 @@
 #define IDS_JUKEBOX_THEME               30107
 #define IDS_JUKEBOX_NOW_PLAYING         30108
 #define IDS_TITLE_JUKEBOX               30109
+#define IDS_CONTROL_CROUCHLOCKTOGGLE    30110
+#define IDS_ACTIONSTRING_CROUCHLOCKTOGGLE    30111
 
 // Next default values for new objects
 // 

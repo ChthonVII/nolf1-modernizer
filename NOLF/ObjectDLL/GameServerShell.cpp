@@ -1508,6 +1508,8 @@ void CGameServerShell::OnCommandOn(HCLIENT hClient, int command)
 	{
 		case COMMAND_ID_RUNLOCK	: pPlayer->ToggleRunLock(); break;
 
+		case COMMAND_ID_CROUCHLOCK	: pPlayer->ToggleCrouchLock(); break;
+
 		default : break;
 	}
 }

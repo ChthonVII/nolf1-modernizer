@@ -2,55 +2,63 @@
 
 ## What?
 
-This is version 1.006 Patch 3.1 (the same version that ships with NOLF Revival) with two things added:
+This fork collects four versions of NOLF1 Modernizer with two things added:
 - The "crouch toggle" feature from [the "crouch toggle" Modernizer on Mod DB](https://www.moddb.com/games/no-one-lives-forever/downloads/nolf-modernizer-with-crouch-toggle-v10)
 - [Daniel Gibson's fixes](https://github.com/haekb/nolf1-modernizer/pull/55)
 
+The versions available here make those two additions on top of:
+- v1.006 Patch 3.1 (the version that ships with NOLF Revival, also downloadable from itch.io)
+- v1.006 Patch 4A (updated master server to openspy.net, downloadable from itch.io)
+- v1.006 Patch 4B (jukebox-related commits from github)
+- v1.006 Patch 4AB (4A and 4B combined)
+
 ## Why?
 
-The "crouch toggle" Modernizer on Mod DB doesn't work on some versions of Wine/Proton on Linux. (It blackscreens immediately.) That mod is based on Modernizer 1.006 Patch 4, which seems to be problematic. So I backported the crouch toggle on top of Patch 3.1, and it works.
-
-## How?
-
-The Modernizer source lacks good version control information, but we can deduce that version 1.006 Patch 3.1 probably corresponds to [commit 0bee38b](https://github.com/haekb/nolf1-modernizer/commit/0bee38bf0bf0debb884587ad9a8abc6886c3828c) by comparing the text files included in the released zip against their version histories on github.
-
-The "crouch toggle" Modernizer on Mod DB comes with source code. `grep -nri crouch` gives us a list of lines that need changed.
-
-Daniel Gibson's pull request is on github and can be cherry-picked.
+The "crouch toggle" Modernizer on Mod DB doesn't work on some versions of Wine/Proton on Linux. (It blackscreens immediately.) That mod additional commits from the Modernizer github, at least one of which is causing problems. So I backported the crouch toggle (and Daniel Gibson's fixes) on top of Patch 3.1, and it worked. Then I started trying to untangle what "Patch 4" actually means (see "Modernizer Version Confusion" below), and what commits after Patch 3.1 could be safely incorporated.
 
 ## How to Use
 
-- Put `MODERNIZERP3CROUCH.REZ` in your `<NOLF_install_directory>\Custom` directory.
-- Run the launcher, go to "Advanced" > "Customize," remove `MODERNIZER.REZ`, and add `MODERNIZERP3CROUCH.REZ`. (If you have other mods, you'll need to remove and re-add all of them to preserve the ordering.)
+- Extract at least one of `MODERNIZER_P3_CROUCH.REZ`, `MODERNIZER_P4A_CROUCH.REZ`, `MODERNIZER_P4B_CROUCH.REZ`, and `MODERNIZER_P4AB_CROUCH.REZ` into your `<NOLF_install_directory>\Custom` directory.
+- Run the launcher, go to "Advanced" > "Customize," remove `MODERNIZER.REZ`, and add one of the rez files you just extracted. (If you have other mods, you'll need to remove and re-add all of them to preserve the ordering.)
 - Edit `autoexec.cfg` by adding `AddAction CrouchLock 18` at the bottom of the block of lines that begin with `AddAction`.
 - In game, you can now bind a key for crouch toggle under "Misc. Controls."
 
-## Moderizer Version Confusion
+## Known Issue
+
+This might cause trouble in multiplayer because it shares version numbers with builds that don't have a crouch toggle.
+Make sure not to start multiplayer games with people using other Modernizer forks that don't have crouch toggle.
+
+(Given all the confusion with "Patch 4," I don't want to number this "Patch 5," because we're totally outside any sort of linear numbering system at this point. And that would likely collide with some other fork anyway.)
+
+## Modernizer Version Confusion
 
 The Modernizer source lacks good version control information. Here is my best effort to reconstruct it:
-- Version 1.006 Patch 3.1 probably corresponds to [commit 0bee38b](https://github.com/haekb/nolf1-modernizer/commit/0bee38bf0bf0debb884587ad9a8abc6886c3828c).
+- Version 1.006 Patch 3.1. (ships with NOLF Revival, also downloadable from [the official(?) itch.io page](https://haekb.itch.io/nolf-modernizer))
+     - This probably corresponds to [commit 0bee38b](https://github.com/haekb/nolf1-modernizer/commit/0bee38bf0bf0debb884587ad9a8abc6886c3828c).
      - The rez file's creation date stamp is 2/20/2020.
      - The included copy of `nolf-modernizer-readme.txt` is older than [commit b61a1a9](https://github.com/haekb/nolf1-modernizer/commit/b61a1a9a02536ba4b3b9c9cb9e879c48a9c4266f) (5/6/2020).
      - The included copy of `nolf-modernizer-readme.txt` is at least as new as [commit f4b9b98](https://github.com/haekb/nolf1-modernizer/commit/f4b9b98167c9fe29348844d4079776a44e33aac6) (2/19/2020).
      - The included copy of `defctrls.cfg` is at least as new as [commit 3573050](https://github.com/haekb/nolf1-modernizer/commit/35730501349ae15488dfa35cc5f5951ac1e1671d) (2/19/2020).
-     - The single commit on 2/20/2020 (0bee38b), following lots of commits on 2/19/2020, probably lines up with the jump from Patch 3 to Patch 3.1.
-- There appear to be three ***different*** things called "Patch 4."
-- The "NOLF Modernizer 1.006 Patch 4 (openspy.net edition)" available for download on [the official(?) itch.io page](https://haekb.itch.io/nolf-modernizer) *seems* to be Patch 3.1 plus *only* [commit 0fbeba9](https://github.com/haekb/nolf1-modernizer/commit/0fbeba976d19fb2e0919e2b3b75a400726513b44).
+     - The single commit on 2/20/2020 (0bee38b), following lots of commits on 2/19/2020, probably corresponds to the jump from Patch 3 to Patch 3.1.
+- There appear to be three ***different*** things called "Patch 4." I have designated them as 4A, 4B, and 4C.
+- 4A: The "NOLF Modernizer 1.006 Patch 4 (openspy.net edition)" available for download on [the official(?) itch.io page](https://haekb.itch.io/nolf-modernizer)
+     - This *seems* to be Patch 3.1 plus *only* [commit 0fbeba9](https://github.com/haekb/nolf1-modernizer/commit/0fbeba976d19fb2e0919e2b3b75a400726513b44).
      - The rez file's creation date stamp is 1/25/2026. The only commit since 2020 is 0fbeba9 on 1/26/2026. (The one day delay is potentially explained as the rez file being generated from an uncommitted change that was committed the next day.)
      - The included copy of `nolf-modernizer-readme.txt` describes Patch 4 as "Updated master server to openspy.net." This version of `nolf-modernizer-readme.txt` does not exist anywhere in the github history.
      - The unpacked rez file does not include the `Jukebox.txt` file introduced by [commit 494747e](https://github.com/haekb/nolf1-modernizer/commit/494747e4d4a1c57563aa5302f666ba5418b5384c) (5/6/2020), the first commit after Patch 3.1. Nor does it include any of the asset files added in later commits.
      - This rez file is capable of playing the introductory movies, which means that it does not include [commit 25bac3d](https://github.com/haekb/nolf1-modernizer/commit/25bac3d43c40a83b8e90201a70a14ef63b4240e7).
-     - Based on the foregoing, my best *guess* is that "NOLF Modernizer 1.006 Patch 4 (openspy.net edition)" is Patch 3.1 plus *only* commit 0fbeba9.
-- The `readme.md` file on github describes Patch 4 as jukebox-related changes.
+- 4B: Jukebox-related changes described as "Patch 4" in the `readme.md` file on github.
+     - The `readme.md` file says that "Patch 4" is "Re-worked jukebox into an attribute file; Added missing ambient track for the Main Theme to the Jukebox; Added some jukebox strings to CRes.dll"
      - The final update to `readme.md`, as well as the final jukebox-related commit, is [commit 844ccbe](https://github.com/haekb/nolf1-modernizer/commit/844ccbe9965c4ba07b5b47c55bf600b42bc71b87) (5/6/2020).
-- Most Modernizer forks (which describe themselves as "based on Patch 4" when they bother to specify) simply take the whole history of the master branch on github, including commits after 5/6/2020 which do not belong to anything else called "Patch 4" (aside from 0fbeba9).
+- 4C: *Everything* in the master branch on github after Patch 3.1.
+     - Most Modernizer forks (which describe themselves as "based on Patch 4" when they bother to specify) simply take the whole history of the master branch on github, including commits after 5/6/2020 which do not belong to anything else called "Patch 4" (aside from 0fbeba9).
+     - At least one of these commits is bad, causing the blackscreen on Linux.
 
-## Known Issue
+## Sources for Crouch Toggle and Daniel Gibson Fixes
 
-This might cause trouble in multiplayer because it shares the same version number as 1.006 Patch 3.1.
-Make sure not to start multiplayer games with people using other Modernizer forks.
+The "crouch toggle" Modernizer on Mod DB comes with partial source code. (Just the files that were modified.) `grep -nri crouch` gives us a list of lines that need changed.
 
-(I don't want to number this "Patch 5," because it's based on Patch 3. And that would likely collide with some other fork anyway.)
+[Daniel Gibson's pull request](https://github.com/haekb/nolf1-modernizer/pull/55) is on github and can be cherry-picked.
 
 ## How to Build
 
@@ -65,6 +73,8 @@ Add the following components to MS Visual Studio:
 - C++ ... MFC for v142 build tools (x86 & x64)
 - C++ Universal Windows Platform support for ARM64/ARM64EC build tools (Yes, you need this even though it says it's for ARM. Otherwise you will get “VC Project Cache error: Cannot establish connection to vcxprojreader.exe process: error code ‘80004005’")
 
+Checkout the branch you want in git.
+
 Open `NOLF\NOLF.sln` in Visual Studio.
 
 Select the "Final Release" build solution. (Per the original documentation, only "Release" and "Final Release" can be used in rez files. Per Modernizer's readme, only "Debug" and "Final Release" are set up to build.)
@@ -76,17 +86,19 @@ Copy these 3 files somewhere:
 - `NOLF\ClientShellDLL\Final_Release\CShell.dll`
 - `NOLF\ObjectDLL\Final_Release\Object.lto`
 
-Use `TOOLS\lithrez.exe` to unpack the `MODERNIZER.REZ` that shipped with NOLF Revival.
+Use `TOOLS\lithrez.exe` to unpack the `MODERNIZER.REZ` that shipped with NOLF Revival (v1.006 Patch 3.1).
 The command is `lithrez.exe x MODERNIZER.REZ output_directory`.
 
 Replace the binaries in the unpacked directory with your own.
 (Since this is Windows, it shouldn't be case sensitive, but rename them to all caps just to be safe.)
 
+For the Patch 4B and 4AB versions, copy `ASSETS\Attributes\Jukebox.txt` into the `ATTRIBUTES` subdirectory of the unpacked directory.
+
 Use `TOOLS\lithrez.exe` to pack your new rez file. The command is `lithrez.exe c NEWNAME.REZ input_directory`.
 
 ## TODO Someday...
 
-Figure out what's wrong with Patch 4 and fix it, or cherry pick everything else that's not problematic.
+Figure out what's wrong with Patch 4C and fix it, or cherrypick everything else that's not problematic.
 
 ## Original Readme starts now:
 
